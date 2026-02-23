@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Milan - Ngôi Đền Huyền Thoại</title>
+    <style>
+        :root {
+            --milan-red: #c8102e;
+            --milan-black: #0b0b0b;
+            --gold: #d4af37;
+            --text-gray: #bbbbbb;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            background-color: var(--milan-black);
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0,0,0,0.9);
+            padding: 15px 5%;
+            position: fixed;
+            width: 90%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--milan-red);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo { font-size: 24px; font-weight: bold; color: var(--milan-red); letter-spacing: 2px; }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--milan-black)), 
+                        url('https://images2.alphacoders.com/520/520448.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 5rem; margin: 0; text-transform: uppercase; letter-spacing: 5px; }
+        .hero p { font-size: 1.5rem; color: var(--gold); font-style: italic; }
+
+        /* Trophy Room Bar */
+        .trophy-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px;
+            background: #111;
+            border-bottom: 1px solid #222;
+        }
+        .trophy-item { text-align: center; color: var(--gold); }
+        .trophy-item span { display: block; font-size: 2rem; font-weight: bold; color: white; }
+
+        /* Legends Section */
+        .legends-container { padding: 80px 10%; }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 50px; color: var(--milan-red); text-transform: uppercase; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.4s;
+            border: 1px solid #222;
+        }
+
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(200, 16, 46, 0.3); }
+        .card-img { height: 400px; background-size: cover; background-position: center; filter: grayscale(50%); transition: 0.5s; }
+        .card:hover .card-img { filter: grayscale(0%); }
+        .card-info { padding: 20px; text-align: center; }
+        .card-info h3 { color: var(--gold); margin: 0; font-size: 1.5rem; }
+
+        /* Quote Box */
+        .quote-box {
+            padding: 120px 15%;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://theanalyst.com/wp-content/uploads/2021/04/ac-milan-sacchi.jpg') center/cover;
+            text-align: center;
+            font-size: 2rem;
+            font-style: italic;
+            color: #eee;
+            border-top: 2px solid var(--milan-red);
+            border-bottom: 2px solid var(--milan-red);
+            margin: 50px 0;
+        }
+
+        /* Managers Section */
+        .managers-section { padding: 80px 10%; text-align: center; background: #050505; }
+        .manager-grid { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 40px; }
+        .manager-item img { width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--milan-red); object-fit: cover; margin-bottom: 15px; }
+        .manager-item h4 { color: var(--gold); font-size: 1.4rem; margin: 0; }
+        .manager-item p { color: var(--text-gray); font-style: italic; }
+
+        /* Modal Popup */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: #1a1a1a; width: 90%; max-width: 600px;
+            padding: 40px; border-radius: 20px; border: 1px solid var(--gold);
+            position: relative; animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 35px; cursor: pointer; color: white; }
+        .modal-body h2 { color: var(--milan-red); font-size: 2.5rem; margin: 0; }
+        .modal-body p { line-height: 1.8; color: var(--text-gray); margin: 20px 0; font-size: 1.1rem; }
+        
+        .stats-box { display: flex; justify-content: space-around; background: #111; padding: 20px; border-radius: 10px; border-top: 2px solid var(--gold); }
+        .stat-item b { font-size: 1.8rem; color: white; display: block; }
+        .stat-item span { color: var(--milan-red); font-size: 0.8rem; font-weight: bold; }
+
+        footer { padding: 60px; text-align: center; border-top: 1px solid #222; color: #555; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AC MILAN LEGACY</div>
+    </header>
+
+    <section class="hero">
+        <h1>ROSSONERI</h1>
+        <p>Thánh đường của những vị thần bóng đá</p>
+    </section>
+
+    <div class="trophy-bar">
+        <div class="trophy-item"><span>7</span> Champions League</div>
+        <div class="trophy-item"><span>19</span> Scudetto</div>
+        <div class="trophy-item"><span>5</span> UEFA Super Cup</div>
+    </div>
+
+    <section class="legends-container">
+        <h2 class="section-title">Ngôi Đền Huyền Thoại</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('Paolo Maldini', 'Hậu vệ / Đội trưởng', 'Người cận vệ trung thành nhất lịch sử. Dành trọn 25 năm sự nghiệp cho Milan, giành 5 chức vô địch C1.', '902', '33', '5')">
+                <div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Paolo_Maldini_2019.jpg/640px-Paolo_Maldini_2019.jpg')"></div>
+                <div class="card-info"><h3>Paolo Maldini</h3><p>Số 3 - Bất tử</p></div>
+            </div>
+
+            <div class="card" onclick="openModal('Ricardo Kaka', 'Tiền vệ tấn công', 'Thiên thần của San Siro. Quả bóng vàng cuối cùng trước kỷ nguyên Messi-Ronaldo.', '307', '104', '1')">
+                <div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kaka_Lille_Milan.jpg/640px-Kaka_Lille_Milan.jpg')"></div>
+                <div class="card-info"><h3>Ricardo Kaká</h3><p>Số 22 - Thiên thần</p></div>
+            </div>
+
+            <div class="card" onclick="openModal('Marco van Basten', 'Tiền đạo', 'Thiên nga vùng Utrecht. Tác giả của những bàn thắng không tưởng và 3 Quả bóng vàng.', '201', '125', '2')">
+                <div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d9/Marco_van_Basten_1990.jpg')"></div>
+                <div class="card-info"><h3>Van Basten</h3><p>Số 9 - Sát thủ</p></div>
+            </div>
+
+            <div class="card" onclick="openModal('A. Shevchenko', 'Tiền đạo', 'Linh hồn Ukraine. Sát thủ vòng cấm với những cú dứt điểm lạnh lùng và tốc độ xé gió.', '322', '175', '1')">
+                <div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/1a/Andriy_Shevchenko_2021.jpg')"></div>
+                <div class="card-info"><h3>Shevchenko</h3><p>Số 7 - Linh hồn</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-box">
+        "Milan không chỉ là một đội bóng. Đó là một tôn giáo của cái đẹp."
+    </section>
+
+    <section class="managers-section">
+        <h2 class="section-title">Những Kiến Trúc Sư</h2>
+        <div class="manager-grid">
+            <div class="manager-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Arrigo_Sacchi_2011.jpg" alt="Sacchi">
+                <h4>Arrigo Sacchi</h4>
+                <p>Cách mạng bóng đá</p>
+            </div>
+            <div class="manager-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Carlo_Ancelotti_2016.jpg" alt="Ancelotti">
+                <h4>Carlo Ancelotti</h4>
+                <p>Vị vua Champions League</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <h2 id="modalName">Tên</h2>
+                <h4 id="modalPos" style="color:var(--gold)">Vị trí</h4>
+                <p id="modalDesc">Mô tả chi tiết...</p>
+                <div class="stats-box">
+                    <div class="stat-item"><b id="statMatches">0</b><span>TRẬN</span></div>
+                    <div class="stat-item"><b id="statGoals">0</b><span>BÀN</span></div>
+                    <div class="stat-item"><b id="statC1">0</b><span>CÚP C1</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 AC Milan Legacy Project | Forza Milan Sempre</p>
+    </footer>
+
+    <script>
+        function openModal(name, pos, desc, matches, goals, c1) {
+            document.getElementById('modalName').innerText = name;
+            document.getElementById('modalPos').innerText = pos;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('statMatches').innerText = matches;
+            document.getElementById('statGoals').innerText = goals;
+            document.getElementById('statC1').innerText = c1;
+            document.getElementById('playerModal').style.display = 'flex';
+        }
+        function closeModal() { document.getElementById('playerModal').style.display = 'none'; }
+        window.onclick = function(e) { if(e.target == document.getElementById('playerModal')) closeModal(); }
+    </script>
+</body>
+</html>
